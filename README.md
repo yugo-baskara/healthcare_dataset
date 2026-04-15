@@ -37,9 +37,9 @@ Ad-hoc analytical queries
 ```
 
 This architecture ensures:
-• preservation of original data,
-• controlled data transformation,
-• and reliable analytical outputs.
+* preservation of original data,
+* controlled data transformation,
+* and reliable analytical outputs.
 
 ---
 
@@ -66,11 +66,11 @@ portofolio.healthcare_dataset_raw
 The raw table stores data exactly as received from the source system.
 
 Columns include:
-• patient demographics,
-• hospital information,
-• medical conditions,
-• billing data,
-• admission and discharge dates.
+* patient demographics,
+* hospital information,
+* medical conditions,
+* billing data,
+* admission and discharge dates.
 
 No transformation is applied at this stage.
 
@@ -79,12 +79,12 @@ No transformation is applied at this stage.
 ## Ingestion Mechanism
 
 Data is loaded using:
-• comma-separated values,
-• optional quoted fields,
-• header row exclusion.
+* comma-separated values,
+* optional quoted fields,
+* header row exclusion.
 
 Special handling:
-• first column is mapped using a variable (`@name`) to align with auto-increment `patient_id`.
+* first column is mapped using a variable (`@name`) to align with auto-increment `patient_id`.
 
 ---
 
@@ -92,11 +92,11 @@ Special handling:
 
 Basic profiling queries are executed to identify:
 
-• total row count,
-• NULL values,
-• duplicate records,
-• invalid age values,
-• missing billing data.
+* total row count,
+* NULL values,
+* duplicate records,
+* invalid age values,
+* missing billing data.
 
 This step ensures early detection of structural issues.
 
@@ -116,7 +116,7 @@ This table represents the curated analytical dataset.
 
 #### Text Standardization
 
-• all text fields are trimmed and converted to uppercase
+* all text fields are trimmed and converted to uppercase
 
 #### Gender Normalization
 
@@ -128,13 +128,13 @@ This table represents the curated analytical dataset.
 
 #### Date Validation & Conversion
 
-• only valid `YYYY-MM-DD` format is accepted
-• invalid formats converted to NULL
+* only valid `YYYY-MM-DD` format is accepted
+* invalid formats converted to NULL
 
 #### Financial Data
 
-• billing_amount preserved as numeric
-• invalid or NULL values identified during validation
+* billing_amount preserved as numeric
+* invalid or NULL values identified during validation
 
 ---
 
@@ -142,9 +142,9 @@ This table represents the curated analytical dataset.
 
 The following validations are implemented:
 
-• age must be between 0–120
-• billing_amount must be ≥ 0
-• discharge_date must be ≥ admission_date
+* age must be between 0–120
+* billing_amount must be ≥ 0
+* discharge_date must be ≥ admission_date
 
 Invalid records are not removed but flagged through validation queries.
 
@@ -156,11 +156,11 @@ All analysis is performed on the clean table.
 
 ### 1. Revenue Analysis
 
-• total and average revenue per hospital
+* total and average revenue per hospital
 
 ### 2. Length of Stay (LOS)
 
-• average hospital stay duration using:
+* average hospital stay duration using:
 
 ```sql
 DATEDIFF(discharge_date, admission_date)
@@ -168,19 +168,19 @@ DATEDIFF(discharge_date, admission_date)
 
 ### 3. Medical Condition Frequency
 
-• most common diseases across patients
+* most common diseases across patients
 
 ### 4. Medication Usage
 
-• most frequently prescribed medications
+* most frequently prescribed medications
 
 ### 5. Abnormal Test Rate
 
-• percentage of abnormal test results per hospital
+* percentage of abnormal test results per hospital
 
 ### 6. Revenue Classification
 
-• grouping medical conditions into:
+* grouping medical conditions into:
 
 * LOW
 * MEDIUM
@@ -193,11 +193,11 @@ DATEDIFF(discharge_date, admission_date)
 
 This project demonstrates:
 
-• layered data architecture (raw → clean → analytics),
-• defensive SQL techniques (REGEXP, NULLIF),
-• robust date validation handling,
-• separation of ingestion and transformation logic,
-• reusable analytical queries.
+* layered data architecture (raw → clean → analytics),
+* defensive SQL techniques (REGEXP, NULLIF),
+* robust date validation handling,
+* separation of ingestion and transformation logic,
+* reusable analytical queries.
 
 ---
 
@@ -205,9 +205,9 @@ This project demonstrates:
 
 Indexes are created on:
 
-• hospital
-• medical_condition
-• admission_date
+* hospital
+* medical_condition
+* admission_date
 
 This improves performance for aggregation and filtering queries.
 
@@ -223,7 +223,7 @@ portofolio.audit_log
 
 Used to track data quality issues such as:
 
-• invalid date relationships
+* invalid date relationships
 
 This enables basic data governance tracking.
 
@@ -231,10 +231,10 @@ This enables basic data governance tracking.
 
 ## Assumptions and Scope
 
-• each row represents one patient record
-• dataset may contain inconsistencies and missing values
-• project focuses on analytical readiness, not transactional design
-• pipeline is batch-based
+* each row represents one patient record
+* dataset may contain inconsistencies and missing values
+* project focuses on analytical readiness, not transactional design
+* pipeline is batch-based
 
 ---
 
@@ -272,8 +272,8 @@ healthcare_dataset_raw
 5. Execute analytical queries
 
 Ensure:
-• file path is allowed by `secure_file_priv`
-• MySQL server has file access
+* file path is allowed by `secure_file_priv`
+* MySQL server has file access
 
 ---
 
@@ -281,17 +281,18 @@ Ensure:
 
 This repository serves as a reference for:
 
-• SQL-based data cleaning pipelines
-• healthcare data analysis preparation
-• real-world data validation scenarios
-• analytical dataset construction
+* SQL-based data cleaning pipelines
+* healthcare data analysis preparation
+* real-world data validation scenarios
+* analytical dataset construction
 
 ---
 
 ## 👤 Author
 
-Yugo
-Data Analyst | SQL | Data Engineering Enthusiast
+Y Baskara : https://www.linkedin.com/in/yugobaskara/
+
+Auditors| Data Analyst | SQL | Data Engineering Enthusiast
 
 ---
 
